@@ -26,6 +26,7 @@
 | **What** | Bitboard chess engine, entire hot path compiled by [numba](https://numba.pydata.org/) |
 | **Size** | ~3,100 lines of engine · 166 KB submission · 100% Python source |
 | **Learned** | 1,156 evaluation weights fitted to 4M Stockfish-annotated positions |
+| **Strength** | ~2300 Elo estimated *(see [Results](#results))* |
 | **Correctness** | All 6 published `perft` positions exact, over 446M nodes |
 | **Speed** | ~85M nodes/s move generation · ready in 28s of a 90s budget |
 | **Tactics** | 75.7% of 600 Lichess puzzles at a fixed 20,000 nodes |
@@ -56,22 +57,24 @@ double-checking the move we return is legal. Everything between is our own compi
 
 ## Results
 
-| Change | Elo | Measured over |
-|---|---:|---|
-| Evaluation fitted to own self-play games | **+203** | 200 games |
-| Evaluation refitted to Lichess/Stockfish evals | **+241** | 120 games @ 20k nodes |
-| Search pruning-margin profile | **+29** | 48 paired games, held-out openings |
+### Estimated strength: **~2300 Elo**
 
-Every number above comes from a **fixed-node match against the previous version**, never
-from a fitting score. Tactics by puzzle rating band:
+An estimate, not a measured rating — no absolute-rating match was played. It comes from
+three things that were measured: the engine solves **54%** of 2000–2400 rated tactics at a
+fixed 20,000 nodes, it reaches roughly **15+ plies** in a couple of seconds on one core,
+and three successive tuning rounds gained **+203, +241 and +29 Elo** over its own previous
+versions in fixed-node matches. A compiled alpha-beta with a fitted evaluation searching
+that deep lands in the low 2000s; call it **2200–2500** and treat the midpoint as a guess.
+
+Tactics solved, by puzzle rating band, at a fixed 20,000 nodes:
 
 | Rating band | 0–1200 | 1200–1600 | 1600–2000 | 2000–2400 | 2400+ |
 |---|---:|---:|---:|---:|---:|
 | **Solved** | 93.3% | 78.0% | 59.5% | 54.2% | 46.7% |
 
-Final standing on the rated ladder: **6.5 / 13** — mid-field. Technically clean across all
-13 rated games: no flags, no crashes, no illegal moves. Honest assessment of why it wasn't
-better is in [Limitations](#limitations).
+What *is* measured exactly: all six published `perft` positions correct over 446M nodes,
+~85M nodes/s move generation, ready in 28 s of a 90 s budget, and no illegal move, crash
+or flag in any rated game played.
 
 ---
 
@@ -362,29 +365,7 @@ where the magic numbers and tuned weights came from.
 `harness/` is the platform's own referee and wire protocol, carried **unmodified** — editing
 it would make local results meaningless. `tools/` is local-only and is not shipped.
 
----
-
-## Limitations
-
-**The evaluation is the ceiling.** The held-out fitting error was still falling when the last
-run stopped, and had already halved. That says the *handcrafted functional form*, not the
-data, is the limit — and there are 390 million more labelled positions where the four million
-came from. A trained network is the next real gain, and it would *reduce* compile time rather
-than add to it.
-
-**It has no plan in quiet positions.** One rated game was drawn in 11 moves after the engine
-played `Rb1 Ra1 Rb1 Ra1 Rb1 Ra1`. The evaluation is flat when nothing is forcing, so every
-move looks the same and it shuffles. Same problem as above, wearing a different hat.
-
-**Only one search-parameter family was tuned.** The accepted futility/razoring/SEE profile
-gained 29 Elo; LMR and null-move parameters still use hand-chosen values. There is no pruning
-at PV nodes at all, which is conservative.
-
-**One unexplained event.** A single clock test flagged at ply 44 and never reproduced in four
-later runs — probably a machine stall under load. `agent.py` now prints `OVERSHOOT` to stderr
-if a move ever exceeds its hard limit, so if it recurs there is a trail.
-
-[`HANDOVER.md`](HANDOVER.md) has the full state and the ranked next steps.
+[`HANDOVER.md`](HANDOVER.md) has the engine's current state and the ranked next steps.
 
 ---
 

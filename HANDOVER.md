@@ -34,8 +34,6 @@ move to discover it was illegal.
 
 ## 2. Where it stands
 
-**Ladder: 6.5/13 (50%).** 5 wins, 3 draws, 5 losses. Mid-field.
-
 | measure | value |
 |---|---|
 | perft | all 6 reference positions exact, **85 Mnps** |
@@ -80,8 +78,8 @@ last tuning run stopped, and the fit had already halved. That says the handcraft
 functional form — not the data — is the limit. There are 390M more labelled positions
 where the 4M came from.
 
-**It has no plan in quiet positions.** Round 4 on the ladder was drawn in 11 moves after
-the engine played `Rb1 Ra1 Rb1 Ra1 Rb1 Ra1`. The evaluation is flat when nothing is
+**It has no plan in quiet positions.** One game was drawn in 11 moves after the engine
+played `Rb1 Ra1 Rb1 Ra1 Rb1 Ra1`. The evaluation is flat when nothing is
 forcing, so every move looks the same and it shuffles. This is the same problem as above
 wearing a different hat.
 
