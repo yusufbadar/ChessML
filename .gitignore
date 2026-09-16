@@ -1,0 +1,25 @@
+# Training data and caches: ~220 MB of streamed positions, all regenerable with
+# scripts/fetch_evals.py. The trained weights themselves live in nx_params.py as source.
+data/
+*.npz
+*.npy
+*.csv
+*.log
+
+# Build output, regenerate with: python -m harness.package --include scripts
+submission.zip
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
