@@ -6,7 +6,8 @@
 
 <p align="center">
   <b>A chess engine in pure Python that plays at a speed Python is not supposed to reach.</b><br>
-  <sub>Built for the Optiver Chess × Machine Learning Hackathon (AI Chessathon 2026)</sub>
+  <sub>Built for the Optiver Chess × Machine Learning Hackathon (AI Chessathon 2026)</sub><br>
+  <sub>Team: Yusuf Badar & Sandra Ravishankar</sub>
 </p>
 
 <p align="center">
