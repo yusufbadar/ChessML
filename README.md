@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/banner.jpg" alt="Chess x Machine Learning Hackathon — Optiver" width="100%">
+  <img src="docs/banner.jpg" alt="Chess x Machine Learning Hackathon — Optiver" width="480">
 </p>
 
 <h1 align="center">ChessML</h1>
