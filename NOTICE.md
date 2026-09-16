@@ -47,6 +47,13 @@ No chess engine's source code is used, vendored, linked, or executed anywhere in
 repository. See the "On using Stockfish-labelled data" section of the README for why
 training on engine-annotated positions was permitted under the competition rules.
 
+## `docs/banner.jpg` — event artwork
+
+The banner is the official promotional artwork for the Optiver Chess x Machine Learning
+Hackathon (AI Chessathon 2026), copyright its respective owners. It is included solely to
+identify the competition this project was built for. No affiliation with, sponsorship by,
+or endorsement from Optiver or the event organisers is implied.
+
 ## Runtime dependencies
 
 `python-chess`, `numpy` and `numba`, all installed from PyPI and not vendored.

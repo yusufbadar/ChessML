@@ -1,4 +1,9 @@
 # Normalise line endings so the repo is identical on every platform.
 * text=auto eol=lf
+
+# Binary assets
 *.png binary
+*.jpg binary
+*.jpeg binary
+*.jfif binary
 *.zip binary
